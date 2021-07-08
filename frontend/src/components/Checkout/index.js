@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const steps = ['Shipping address', 'Payment details', 'Review your order'];
+const steps = ['Informações', 'Dia/Hora', 'Comfirmação'];
 
 function getStepContent(step) {
   switch (step) {

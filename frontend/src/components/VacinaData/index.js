@@ -4,46 +4,95 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import { makeStyles } from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import Button from '@material-ui/core/Button';
+
+const useStyles = makeStyles((theme) => ({
+  button: {
+    display: 'block',
+    marginTop: theme.spacing(2),
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+}));
 
 export default function VacinaData() {
+
+  const classes = useStyles();
+  const [age, setAge] = React.useState('');
+  const [open, setOpen] = React.useState(false);
+
+  const handleChange = (event) => {
+    setAge(event.target.value);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
   return (
-    <React.Fragment>
-      <Typography variant="h6" gutterBottom>
-        Payment method
-      </Typography>
-      <Grid container spacing={3}>
-        <Grid item xs={12} md={6}>
-          <TextField required id="cardName" label="Name on card" fullWidth autoComplete="cc-name" />
+    <div>
+      <React.Fragment>
+        <Typography variant="h6" gutterBottom>
+          Agendamento
+        </Typography>
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={6}>
+            <TextField
+              required 
+              id="obsEspecial"
+              label="Observação"
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <TextField
+              required
+              id="date"
+              label="Data"
+              type="datetime-local"
+              fullWidth
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+          </Grid>
+          <Button className={classes.button} onClick={handleOpen}>
+            Possui nescessidades especiais?
+          </Button>
+          <FormControl className={classes.formControl}>
+            <Select
+              labelId="demo-controlled-open-select-label"
+              id="demo-controlled-open-select"
+              open={open}
+              onClose={handleClose}
+              onOpen={handleOpen}
+              value={age}
+              onChange={handleChange}
+            >
+              <MenuItem value="">
+              </MenuItem>
+              <MenuItem value={true}>Sim</MenuItem>
+              <MenuItem value={false}>Não</MenuItem>
+            </Select>
+          </FormControl>
         </Grid>
-        <Grid item xs={12} md={6}>
-          <TextField
-            required
-            id="cardNumber"
-            label="Card number"
-            fullWidth
-            autoComplete="cc-number"
-          />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <TextField required id="expDate" label="Expiry date" fullWidth autoComplete="cc-exp" />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <TextField
-            required
-            id="cvv"
-            label="CVV"
-            helperText="Last three digits on signature strip"
-            fullWidth
-            autoComplete="cc-csc"
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <FormControlLabel
-            control={<Checkbox color="secondary" name="saveCard" value="yes" />}
-            label="Remember credit card details for next time"
-          />
-        </Grid>
-      </Grid>
-    </React.Fragment>
+      </React.Fragment>
+    </div>
   );
+
+  const obs = document.getElementsById("obsEspecial");
+
+  console.log(obs);
+
 }

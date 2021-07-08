@@ -38,9 +38,11 @@ export default function Review() {
 
   return (
     <React.Fragment>
+
       <Typography variant="h6" gutterBottom>
         Order summary
       </Typography>
+
       <List disablePadding>
         {products.map((product) => (
           <ListItem className={classes.listItem} key={product.name}>
@@ -55,6 +57,8 @@ export default function Review() {
           </Typography>
         </ListItem>
       </List>
+
+
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <Typography variant="h6" gutterBottom className={classes.title}>
@@ -81,6 +85,8 @@ export default function Review() {
           </Grid>
         </Grid>
       </Grid>
+
+      
     </React.Fragment>
   );
 }
